@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Libra</string>
+    <string name="hello">
+Welcomes in our application for measuring weight.
+</string>
+    <string name="hello2">
+To begin, you need to calibrate the phones sensors</string>
+    <string name="logoBtn">begin</string>
+</resources>
