@@ -129,7 +129,7 @@ public class AccelView extends View {
                                            @Override
                                            public void onSensorChanged(SensorEvent sensorEvent) {
 
-                                               x += round(sensorEvent.values[0], 5) * 5;
+                                               x -= round(sensorEvent.values[0], 5) * 5;
                                                y += round(sensorEvent.values[1], 5) * 5;
 
                                                if (x + side > width) x = width - side;

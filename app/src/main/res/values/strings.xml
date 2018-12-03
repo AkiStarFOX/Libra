@@ -6,4 +6,9 @@ Welcomes in our application for measuring weight.
     <string name="hello2">
 To begin, you need to calibrate the phones sensors</string>
     <string name="logoBtn">begin</string>
+    <string name="step1">Step 1</string>
+    <string name="step2">Step 2</string>
+    <string name="step3">Step 3</string>
+    <string name="lastStep">
+To complete the settings, place your finger in the center ring and hold it for about 5 seconds.</string>
 </resources>

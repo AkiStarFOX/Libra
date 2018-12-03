@@ -20,6 +20,13 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class ListFragment extends Fragment {
+    onRVItemClickListener onRVItemClickListener;
+    public interface onRVItemClickListener{
+        void onItemClick(String s);
+    }
+    public void setOnRVItemClickListener(onRVItemClickListener onRVItemClickListener){
+        this.onRVItemClickListener = onRVItemClickListener;
+    }
 
     private Unbinder unbinder;
 
@@ -30,10 +37,16 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list,null);
-        List<Category> list = initList();
+        final List<Category> list = initList();
         unbinder = ButterKnife.bind(this,view);
-rv = view.findViewById(R.id.rv);
+        rv = view.findViewById(R.id.rv);
         ListAdapter listAdapter = new ListAdapter(list);
+        listAdapter.setOnItemClickListener(new ListAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int pos) {
+                onRVItemClickListener.onItemClick(list.get(pos).getName());
+            }
+        });
         rv.setLayoutManager(new LinearLayoutManager(getContext()));
         rv.setAdapter(listAdapter);
 
