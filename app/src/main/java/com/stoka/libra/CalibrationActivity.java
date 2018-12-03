@@ -5,20 +5,54 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.badoualy.stepperindicator.StepperIndicator;
+import com.stoka.libra.fragments.CalibrateFragment;
+import com.stoka.libra.fragments.ListFragment;
+import com.stoka.libra.fragments.PutOnTableFragment;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class CalibrationActivity extends AppCompatActivity {
+@BindView(R.id.viewPager)
+    ViewPager viewPager;
+@BindView(R.id.indicator)
+    StepperIndicator indicator;
+
+    CalibrateFragment calibrateFragment;
+    PutOnTableFragment putOnTableFragment;
+    ListFragment listFragment;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calibration);
+        ButterKnife.bind(this);
+        calibrateFragment = new CalibrateFragment();
 
+        putOnTableFragment = new PutOnTableFragment();
+        listFragment = new ListFragment();
+        Log.d("TAG","HERE0");
+        viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(),calibrateFragment,putOnTableFragment,listFragment));
+        indicator.setViewPager(viewPager);
+// or keep last page as "end page"
+        indicator.setViewPager(viewPager, viewPager.getAdapter().getCount() - 1);
+
+//
+       calibrateFragment.setOnViewCreateDoneListener(new CalibrateFragment.onViewCreateDoneListener() {
+           @Override
+           public void onCreateComplete() {
+               viewPager.setCurrentItem(1);
+           }
+       });
 
     }
 
